@@ -12,8 +12,9 @@
             "console": "integratedTerminal",
             "args": ["--image", "examples/places2/case1_input.png",
                      "--mask", "examples/places2/case1_mask.png",
-                     "--output", "examples/places2/case1_output.png",
-                     "--checkpoint_dir", "model_logs/places2_256"],
+                     "--output", "output/case1.png",
+                     "--checkpoint_dir", "model_logs/places2_256"
+                    ],
         }
     ]
 }

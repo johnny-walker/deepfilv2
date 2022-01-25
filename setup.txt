@@ -1,0 +1,11 @@
+conda create -n tf1 python=3.6.13
+conda activate tf1
+pip install tensorflow==1.15
+pip install opencv-python
+pip install git+https://github.com/JiahuiYu/neuralgym
+pip install pyyaml
+pip install pillow
+
+python test.py --image examples/places2/case1_input.png --mask examples/places2/case1_mask.png --output examples/places2/case1_output.png --checkpoint_dir model_logs/places2_256
+
+tensorboard --logdir model_logs --port 6006

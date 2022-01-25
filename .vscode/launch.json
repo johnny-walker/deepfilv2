@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: 目前檔案",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["--image", "examples/places2/case1_input.png",
+                     "--mask", "examples/places2/case1_mask.png",
+                     "--output", "examples/places2/case1_output.png",
+                     "--checkpoint_dir", "model_logs/places2_256"],
+        }
+    ]
+}

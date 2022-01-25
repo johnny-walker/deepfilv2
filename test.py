@@ -7,24 +7,23 @@ import neuralgym as ng
 
 from inpaint_model import InpaintCAModel
 
-
-parser = argparse.ArgumentParser()
-parser.add_argument('--image', default='examples/places2/case1_input.png', type=str,
-                    help='The filename of image to be completed.')
-parser.add_argument('--mask', default='examples/places2/case1_mask.png', type=str,
-                    help='The filename of mask, value 255 indicates mask.')
-parser.add_argument('--output', default='output/case1.png', type=str,
-                    help='Where to write output.')
-parser.add_argument('--checkpoint_dir', default='model_logs/places2_256', type=str,
-                    help='The directory of tensorflow checkpoint.')
-
-def tf_Summary(sess):
+def tf_Summary(sess, outdir='./model_logs'):
     # frozen and summary
     frozen = tf.graph_util.convert_variables_to_constants(sess, sess.graph_def, ["inpaint_net/Tanh_1"])
-    tf.summary.FileWriter('./model_logs', graph=frozen)
-    tf.io.write_graph(frozen, "./model_frozen", "deepfillv2_frozen.pb", as_text=False)
+    tf.summary.FileWriter(outdir, graph=frozen)
+    tf.io.write_graph(frozen, outdir, "deepfillv2_frozen.pb", as_text=False)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--image', default='examples/places2/case1_input.png', type=str,
+                        help='The filename of image to be completed.')
+    parser.add_argument('--mask', default='examples/places2/case1_mask.png', type=str,
+                        help='The filename of mask, value 255 indicates mask.')
+    parser.add_argument('--output', default='output/case1.png', type=str,
+                        help='Where to write output.')
+    parser.add_argument('--checkpoint_dir', default='model_logs/places2_256', type=str,
+                        help='The directory of tensorflow checkpoint.')
+
     FLAGS = ng.Config('inpaint.yml')
     # ng.get_gpus(1)
     args, unknown = parser.parse_known_args()
@@ -80,4 +79,4 @@ if __name__ == "__main__":
         print(time.time()-start)
         cv2.imwrite(args.output, result[0][:, :, ::-1])
 
-        #tf_Summary(sess)
+        tf_Summary(sess)

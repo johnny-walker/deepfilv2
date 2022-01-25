@@ -9,3 +9,4 @@ pip install pillow
 python test.py --image examples/places2/case1_input.png --mask examples/places2/case1_mask.png --output examples/places2/case1_output.png --checkpoint_dir model_logs/places2_256
 
 tensorboard --logdir model_logs --port 6006
+python mo_tf.py --input_model D:\deepfilv2\model_logs\deepfillv2_frozen.pb --output_dir d:/deepfilv2/model_ir_512x1360 --input input_x --input_shape [1,512,1360,3]
